@@ -130,6 +130,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		ACC342572B17B1E300FFC94C /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				ACCCA8312AF01E6200D1BDEC /* ToDoAppTDDTests.swift */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
 		ACCCA80B2AF01E4D00D1BDEC = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +176,7 @@
 				AC6B1E872AF7A8850006EA2E /* Controller */,
 				ACCCA8422AF18FC100D1BDEC /* Manager */,
 				ACCCA83A2AF01EC600D1BDEC /* Model */,
-				ACCCA8312AF01E6200D1BDEC /* ToDoAppTDDTests.swift */,
+				ACC342572B17B1E300FFC94C /* Supporting files */,
 			);
 			path = ToDoAppTDDTests;
 			sourceTree = "<group>";

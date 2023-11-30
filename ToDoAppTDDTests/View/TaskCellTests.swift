@@ -13,6 +13,7 @@ final class TaskCellTests: XCTestCase {
     var cell: TaskCell!
 
     override func setUpWithError() throws {
+        try super.setUpWithError()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: String(describing: TaskListViewController.self)) as! TaskListViewController
         controller.loadViewIfNeeded()
@@ -25,7 +26,7 @@ final class TaskCellTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
     }
     
     func testCellHasTitleLabel() {

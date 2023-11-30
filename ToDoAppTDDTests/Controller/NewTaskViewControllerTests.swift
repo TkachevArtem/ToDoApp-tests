@@ -15,13 +15,14 @@ final class NewTaskViewControllerTests: XCTestCase {
     var placemark: MockCLPlacemark!
 
     override func setUpWithError() throws {
+        try super.setUpWithError()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         sut = storyboard.instantiateViewController(withIdentifier: String(describing: NewTaskViewController.self)) as? NewTaskViewController
         sut.loadViewIfNeeded()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
     }
     
     func testHasTitleTextField() {
@@ -111,6 +112,26 @@ final class NewTaskViewControllerTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
     }
     
+    func testSaveDismissesNewTaskViewController() {
+        let mockNewTaskViewController = MockNewTaskViewController()
+        let textField = UITextField()
+        mockNewTaskViewController.titleTextField = textField
+        mockNewTaskViewController.titleTextField.text = "Foo"
+        mockNewTaskViewController.descriptionTextField = textField
+        mockNewTaskViewController.descriptionTextField.text = "Bar"
+        mockNewTaskViewController.locationTextField = textField
+        mockNewTaskViewController.locationTextField.text = "Baz"
+        mockNewTaskViewController.addressTextField = textField
+        mockNewTaskViewController.addressTextField.text = "Гомель"
+        mockNewTaskViewController.dateTextField = textField
+        mockNewTaskViewController.dateTextField.text = "21.11.23"
+        
+        mockNewTaskViewController.save()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            XCTAssertTrue(mockNewTaskViewController.isDismissed)
+        }
+    }
+    
 }
 
 extension NewTaskViewControllerTests {
@@ -130,5 +151,14 @@ extension NewTaskViewControllerTests {
         override var location: CLLocation? {
             return CLLocation(latitude: mockCoordinate!.latitude, longitude: mockCoordinate!.longitude)
         }
+    }
+    
+    class MockNewTaskViewController: NewTaskViewController {
+        var isDismissed = false
+        
+        override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+            isDismissed = true
+        }
+        
     }
 }

@@ -14,13 +14,14 @@ final class APIClientTests: XCTestCase {
     var mockURLSession: MockURLSession!
 
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = APIClient()
         mockURLSession = MockURLSession(data: nil, urlResponse: nil, responseError: nil)
         sut.urlSession = mockURLSession
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
     }
     
     func userLogin() {
@@ -97,6 +98,23 @@ final class APIClientTests: XCTestCase {
             XCTAssertNotNil(caughtError)
         }
     }
+    
+//    func testLoginResponseErrorReturnsError() {
+//        let jsonDataStub = "{\"token\": \"tokenString\"}".data(using: .utf8)
+//        let error = NSError(domain: "Server error", code: 404)
+//        mockURLSession = MockURLSession(data: jsonDataStub, urlResponse: nil, responseError: error)
+//        sut.urlSession = mockURLSession
+//        let errorExpectation = expectation(description: "Error expectation")
+//        
+//        var caughtError: Error?
+//        sut.login(withName: "login", password: "password") { _ , error in
+//            caughtError = error
+//            errorExpectation.fulfill()
+//        }
+//        waitForExpectations(timeout: 1) { _ in
+//            XCTAssertNotNil(caughtError)
+//        }
+//    }
 
 }
 
