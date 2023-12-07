@@ -43,5 +43,25 @@ final class TaskTests: XCTestCase {
         let task = Task(title: "Bar", description: "Baz", location: location)
         XCTAssertEqual(location, task.location)
     }
+    
+    func testCanBeCreatedFromPlistDictionary() {
+        let location = Location(name: "Baz")
+        let date = Date(timeIntervalSince1970: 100)
+        let task = Task(title: "Foo", description: "Bar", date: date, location: location)
+        
+        let locationDict: [String : Any] = ["name" : "Baz"]
+        let dictionary: [String : Any] = [ "title" : "Foo", "description" : "Bar", "date" : date, "location" : locationDict]
+        let createdTask = Task(dict: dictionary)
+        XCTAssertEqual(task, createdTask)
+    }
+    
+    func testCanBeSerializedIntoDictionary() {
+        let location = Location(name: "Baz")
+        let date = Date(timeIntervalSince1970: 100)
+        let task = Task(title: "Foo", description: "Bar", date: date, location: location)
+        
+        let generatedTask = Task(dict: task.dictionary)
+        XCTAssertEqual(task, generatedTask)
+    }
 
 }

@@ -30,6 +30,7 @@ final class DataProviderTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
+        sut.taskManager?.removeAll()
         try super.tearDownWithError()
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }

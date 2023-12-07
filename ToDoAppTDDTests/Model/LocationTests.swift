@@ -32,5 +32,18 @@ final class LocationTests: XCTestCase {
         XCTAssertEqual(location.coordinate?.longitude, coordinate.longitude)
     }
     
+    func testCanBeCreatedFromPlistDictionary() {
+        let location = Location(name: "Foo", coordinate: CLLocationCoordinate2D(latitude: 100.0, longitude: 100.0))
+        let dict: [String : Any] = ["name" : "Foo", "latitude" : 100.0, "longitude" : 100.0]
+        let createdLocation = Location(dict: dict)
+        
+        XCTAssertEqual(location, createdLocation)
+    }
+    
+    func testCanBeSerializedIntoDictionary() {
+        let location = Location(name: "Foo", coordinate: CLLocationCoordinate2D(latitude: 100.0, longitude: 100.0))
+        let generatedLocation = Location(dict: location.dictionary)
+        XCTAssertEqual(location, generatedLocation)
+    }
 
 }

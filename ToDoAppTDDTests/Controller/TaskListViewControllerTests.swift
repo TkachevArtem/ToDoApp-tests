@@ -55,6 +55,7 @@ final class TaskListViewControllerTests: XCTestCase {
             let action = newTaskButton.action else {
                 return NewTaskViewController()
         }
+        //UIApplication.shared.keyWindow?.rootViewController = sut
         UIApplication.shared.keyWindow?.rootViewController = sut
         sut.performSelector(onMainThread: action, with: newTaskButton, waitUntilDone: true)
         let newTaskViewController = sut.presentedViewController as! NewTaskViewController
